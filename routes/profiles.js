@@ -22,7 +22,7 @@ router.route('/profiles/')
 
 
 //READ specific
-reouter.route('/profile/:id')
+router.route('/profile/:id')
     .get((request, response) => {
         //Find profile by this ID later.
         var requestedId = request.params.id;
@@ -52,3 +52,6 @@ router.route('/profile/delete/:id')
     .post((request,response) => {
 
     });
+
+
+module.exports = router;

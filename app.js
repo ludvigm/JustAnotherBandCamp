@@ -3,6 +3,8 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const db = require('./lib/db.js');
+
 
 
 var path = require('path');
@@ -34,28 +36,21 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+/*
 
-//Session
-app.use(session({
-    name: "supersecretsession1234abcdefgh",
-    secret: "K7sm1m9Ms123ab89wEzVpjgjCep2s", // should be kept secret
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-        secure: false, // No HTTPS
-        httpOnly: true, // Client script cannot mess with cookie
-        maxAge: 1000 * 60 * 60 * 24
-    }
-}));
-
-//Flash
-app.use(function (request, response, next) {
-    if (request.session.flash) {
-        response.locals.flash = request.session.flash;
-        delete request.session.flash;
-    }
-    next();
-});
+ //Session
+ app.use(session({
+ name: "supersecretsession1234abcdefgh",
+ secret: "K7sm1m9Ms123ab89wEzVpjgjCep2s", // should be kept secret
+ saveUninitialized: false,
+ resave: false,
+ cookie: {
+ secure: false, // No HTTPS
+ httpOnly: true, // Client script cannot mess with cookie
+ maxAge: 1000 * 60 * 60 * 24
+ }
+ }));
+ */
 
 //Static
 
@@ -63,6 +58,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Routes
+app.use('/', require('./routes/auth'));
+app.use('/', require('./routes/profiles'));
 
 
 //errors
@@ -74,3 +71,8 @@ res.status(500).render("500");
 });
 
 console.log(app.listen(port, () => console.log('Listening to ' + port)));
+
+db.connect();
+db.createTables();
+db.printUserTable();
+
