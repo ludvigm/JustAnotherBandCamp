@@ -71,8 +71,10 @@ res.status(500).render("500");
 });
 
 console.log(app.listen(port, () => console.log('Listening to ' + port)));
-
+console.log('1');
 db.connect();
+console.log('2');
 db.createTables();
+console.log('3');
 db.printUserTable();
-
+console.log('4');

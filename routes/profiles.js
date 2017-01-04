@@ -1,6 +1,8 @@
 'use strict';
 
 const router = require('express').Router();
+const db = require('../lib/db');
+
 
 
 //CREATE
@@ -17,7 +19,8 @@ router.route('/profile/create')
 router.route('/profiles/')
     .get((request, response) => {
         //ADD Get-all profiles from database here.
-       response.render('profiles/index')
+        db.printUserTable();
+        response.render('profiles/index')
     });
 
 
