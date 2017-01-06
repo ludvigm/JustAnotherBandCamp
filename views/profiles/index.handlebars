@@ -1,1 +1,10 @@
 <h1>All profiles</h1>
+
+{{#each allProfiles}}
+    <div class="profileContainer">
+        <div class="top">{{username}}, {{age}}</div>
+        <div class="mid">Plays {{instrument}} in: {{band}} (Skill: {{skill}})</div>
+        <div class="bot">Intrested in: {{interestgenre}}</div>
+        <div class="contact">Phone:{{contactphone}}, Email:{{contactemail}}</div>
+    </div>
+{{/each}}
