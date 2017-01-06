@@ -29,9 +29,10 @@ router.route('/profiles/:user')
     .get((request, response) => {
         //Find profile by this ID later.
         var user = request.params.user;
+        var profile = db.getProfile(user);
 
         //Pass found user to the template here.
-        response.render('profiles/profile', {user: user});
+        response.render('profiles/profile', {profile : profile});
     });
 
 
