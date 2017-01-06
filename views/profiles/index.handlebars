@@ -2,9 +2,10 @@
 
 {{#each allProfiles}}
     <div class="profileContainer">
-        <div class="top">{{username}}, {{age}}</div>
+        <div class="top"><a href="/profiles/{{username}}">{{username}}</a>, {{age}}</div>
         <div class="mid">Plays {{instrument}} in: {{band}} (Skill: {{skill}})</div>
         <div class="bot">Intrested in: {{interestgenre}}</div>
         <div class="contact">Phone:{{contactphone}}, Email:{{contactemail}}</div>
     </div>
+    <br>
 {{/each}}

@@ -29,13 +29,13 @@ router.route('/profiles/')
 
 
 //READ specific
-router.route('/profile/:id')
+router.route('/profiles/:user')
     .get((request, response) => {
         //Find profile by this ID later.
-        var requestedId = request.params.id;
+        var user = request.params.user;
 
         //Pass found user to the template here.
-        response.render('profiles/profile');
+        response.render('profiles/profile', {user: user});
     });
 
 
