@@ -20,10 +20,6 @@ router.route('/profiles/')
     .get((request, response) => {
         //ADD Get-all profiles from database here.
         var allProfiles = db.getAllProfiles();
-        console.log(allProfiles);
-        for(var i in allProfiles){
-          console.log('Profile numba ' + i + ' ' + allProfiles[i]);
-        }
         response.render('profiles/index', {allProfiles : allProfiles});
     });
 
