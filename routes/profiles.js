@@ -27,7 +27,6 @@ router.route('/profiles/')
             })
     });
 
-
 //READ specific
 router.route('/profiles/:user')
     .get((request, response) => {
@@ -63,7 +62,7 @@ router.route('/profile/delete/:id')
         response.render('snippets/delete');
     })
     .post((request, response) => {
-
+        db.deleteUser(request.params.user);
     });
 
 
