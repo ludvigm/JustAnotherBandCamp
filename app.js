@@ -66,15 +66,16 @@ app.use('/', require('./routes/profiles'));
 app.use((request, response) => response.status(404).render('404'));
 
 app.use((err, req, res) => {
-    console.error(err.stack);
+    //console.error(err.stack);
 res.status(500).render("500");
 });
 
 console.log(app.listen(port, () => console.log('Listening to ' + port)));
-console.log('1');
+/*console.log('1');
 db.connect();
 console.log('2');
 db.createTables();
 console.log('3');
 db.printUserTable();
-console.log('4');
+console.log('4');*/
+db.initDB();

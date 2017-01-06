@@ -19,7 +19,7 @@ router.route('/profile/create')
 router.route('/profiles/')
     .get((request, response) => {
         //ADD Get-all profiles from database here.
-        db.printUserTable();
+        db.printAllTables();
         response.render('profiles/index')
     });
 

@@ -23,14 +23,25 @@ router.route('/register/')
         var user = {
             username : req.body.username,
             password : req.body.password,
-            age : req.body.age,
-            band : req.body.band
+            age      : req.body.age,
+            band     : req.body.band
         };
-        console.log('tryna insert');
-        console.log(user);
 
-        db.insertUser(user);
+        var instrument = {
+            type  : req.body.type,
+            skill : req.body.skill
+        }
 
+        var interest = {
+            genre : req.body.genre
+        }
+
+        var contact = {
+            phone : req.body.phone,
+            email : req.body.email
+        }
+
+        db.registerUser(user, instrument, interest, contact);
         res.redirect('/')
     });
 

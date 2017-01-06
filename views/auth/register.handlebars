@@ -1,11 +1,22 @@
 <h1>dingo</h1>
 <form id="registerform" method="post" action="/register">
 
+    <!-- USER RELATED INFORMATION -->
     <input name="username" type="text" required placeholder="username">
     <input name="password" type="text" required placeholder="password">
-    <input name="age" type="text" required placeholder="age">
-    <input name="band" type="text" required placeholder="band">
+    <input name="age" type="number"    required placeholder="age">
+    <input name="band" type="text"     required placeholder="band">
 
+    <!-- INSTRUMENT RELATED INFORMATION -->
+    <input name="type" type="text"    required placeholder="type">
+    <input name="skill" type="number" required placeholder="skill">
+
+    <!-- INTEREST RELATED INFORMATION -->
+    <input name="genre" type="text"   required placeholder="genre">
+
+    <!-- CONTACT RELATED INFORMATION -->
+    <input name="phone" type="number" required placeholder="phone">
+    <input name="email" type"text"    required placeholder="email">  
 
     <input title="Submit" type="submit">
 
