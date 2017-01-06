@@ -28,7 +28,7 @@ router.route('/profiles/')
     });
 
 //READ specific
-router.route('/profiles/:user')
+router.route('/profile/:user')
     .get((request, response) => {
         //Find profile by this ID later.
         var user = request.params.user;
@@ -45,9 +45,9 @@ router.route('/profiles/:user')
 
 
 //UPDATE
-router.route('/profile/update/:id')
+router.route('/profile/update/:user')
     .get((request, response) => {
-        var id = request.params.id;
+        var id = request.params.user;
         //Select by id
         //Pass profile to template
         response.render('profiles/update');
@@ -57,12 +57,14 @@ router.route('/profile/update/:id')
     });
 
 //DELETE
-router.route('/profile/delete/:id')
+router.route('/profile/delete/:user')
     .get((request, response) => {
-        response.render('snippets/delete');
+        response.render('profiles/delete');
     })
     .post((request, response) => {
         db.deleteUser(request.params.user);
+        response.redirect('/profiles/')
+
     });
 
 
