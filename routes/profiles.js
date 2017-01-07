@@ -78,5 +78,22 @@ router.route('/profile/delete/:user')
 
     });
 
+// MATCH USER
+router.route('/profiles/matchuser')
+    .get((request, response) => {
+      response.render('profiles/matchuser');
+    })
+    .post((request, response) => {
+      console.log('Selected attr: ' + request.body.attribute);
+      console.log('Selected attr: ' + request.body.username);
+      db.matchUser(request.body.username, request.body.attribute)
+      .then(function(data) {
+        response.render('profiles/index', {allProfiles: data});
+      })
+      .catch(function(err){
+          console.log(err);
+      });
+    });
+
 
 module.exports = router;
