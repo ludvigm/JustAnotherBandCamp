@@ -19,7 +19,6 @@ router.route('/register/')
         res.render('auth/register');
     })
     .post(function(req,res) {
-
         var user = {
             username : req.body.username,
             password : req.body.password,

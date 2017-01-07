@@ -47,13 +47,24 @@ router.route('/profile/:user')
 //UPDATE
 router.route('/profile/update/:user')
     .get((request, response) => {
-        var id = request.params.user;
-        //Select by id
         //Pass profile to template
         response.render('profiles/update');
     })
     .post((request, response) => {
-
+        var username = request.params.user;
+        var user = {
+            username : request.body.username,
+            password : request.body.password,
+            age      : request.body.age,
+            band     : request.body.band,
+            type     : request.body.type,
+            skill    : request.body.skill,
+            genre    : request.body.genre,
+            phone    : request.body.phone,
+            email    : request.body.email
+        };
+        db.updateUser(username, user);
+        response.redirect('/profiles/');
     });
 
 //DELETE
@@ -63,7 +74,7 @@ router.route('/profile/delete/:user')
     })
     .post((request, response) => {
         db.deleteUser(request.params.user);
-        response.redirect('/profiles/')
+        response.redirect('/profiles/');
 
     });
 
