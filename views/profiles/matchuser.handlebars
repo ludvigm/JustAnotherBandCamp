@@ -1,6 +1,10 @@
-<h1>Match with other users<h1>
+<h1>Match with other users</h1>
   <form id="matchform" method="post">
-      <input name="username" type="text" required placeholder="username"> 
+      {{#if loggedin}}
+          Matching for user: {{user}}
+      {{else}}
+          <input name="username" type="text" required placeholder="username">
+      {{/if}}
       <select name="attribute">
         <option value="genre">Genre</option>
         <option value="instrument">Instrument</option>

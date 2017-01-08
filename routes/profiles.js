@@ -2,7 +2,20 @@
 
 const router = require('express').Router();
 const db = require('../lib/db');
+const flash = require('../lib/flashHelper');
 
+
+//Frontpage redirect
+router.route('/')
+    .get((request, response) => {
+        response.redirect('/home/');
+    });
+
+//Home
+router.route('/home')
+    .get((request, response) => {
+        response.render('home');
+    });
 
 //CREATE
 router.route('/profile/create')
@@ -19,10 +32,10 @@ router.route('/profiles/')
     .get((request, response) => {
         //ADD Get-all profiles from database here.
         db.getAllProfiles()
-            .then(function(data) {
+            .then(function (data) {
                 response.render('profiles/index', {allProfiles: data});
             })
-            .catch(function(err){
+            .catch(function (err) {
                 console.log(err);
             })
     });
@@ -38,7 +51,7 @@ router.route('/profile/:user')
                 profile = data[0];
                 response.render('profiles/profile', {profile: profile});
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 console.log(err);
             })
     });
@@ -53,15 +66,15 @@ router.route('/profile/update/:user')
     .post((request, response) => {
         var username = request.params.user;
         var user = {
-            username : request.body.username,
-            password : request.body.password,
-            age      : request.body.age,
-            band     : request.body.band,
-            type     : request.body.type,
-            skill    : request.body.skill,
-            genre    : request.body.genre,
-            phone    : request.body.phone,
-            email    : request.body.email
+            username: request.body.username,
+            password: request.body.password,
+            age: request.body.age,
+            band: request.body.band,
+            type: request.body.type,
+            skill: request.body.skill,
+            genre: request.body.genre,
+            phone: request.body.phone,
+            email: request.body.email
         };
         db.updateUser(username, user);
         response.redirect('/profiles/');
@@ -81,18 +94,28 @@ router.route('/profile/delete/:user')
 // MATCH USER
 router.route('/profiles/matchuser')
     .get((request, response) => {
-      response.render('profiles/matchuser');
+        response.render('profiles/matchuser');
     })
     .post((request, response) => {
-      console.log('Selected attr: ' + request.body.attribute);
-      console.log('Selected attr: ' + request.body.username);
-      db.matchUser(request.body.username, request.body.attribute)
-      .then(function(data) {
-        response.render('profiles/index', {allProfiles: data});
-      })
-      .catch(function(err){
-          console.log(err);
-      });
+        var user;
+        if(request.app.locals.user) {       //If logged in
+            user = request.app.locals.user;
+        } else {
+            user = request.body.username;
+        }
+        db.matchUser(user, request.body.attribute)
+            .then(function (data) {
+                if(!data) {
+                    flash(request,'fail','No such user.');
+                    response.redirect('/profiles/matchuser');
+                } else {
+                    response.render('profiles/index', {allProfiles: data});
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
     });
 
 

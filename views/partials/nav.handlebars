@@ -1,0 +1,13 @@
+<a href="/">Home</a><br>
+<a href="/register">Register</a><br>
+<a href="/profiles">All profiles</a><br>
+{{#if loggedin}}
+    <a href="/profile/{{user}}">Your profile</a><br>
+    <a href="/logout">Logout</a><br>
+{{else}}
+    <a href="/login">Login</a><br>
+{{/if}}
+<a href="/profiles/matchuser">Find users</a><br>
+
+<br>
+<br>

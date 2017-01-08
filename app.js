@@ -12,10 +12,6 @@ var path = require('path');
 const app = express();
 const port = process.env.PORT || 8000;
 
-
-//Start DB
-
-
 //Configurations
 var hbs = handlebars.create({
     defaultLayout: 'main',
@@ -36,7 +32,6 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-/*
 
  //Session
  app.use(session({
@@ -50,7 +45,24 @@ app.use(bodyParser.urlencoded({extended: true}));
  maxAge: 1000 * 60 * 60 * 24
  }
  }));
- */
+
+
+//Flash
+app.use(function (request, response, next) {
+    if (request.session.flash) {
+        response.locals.flash = request.session.flash;
+        delete request.session.flash;
+    }
+    next();
+});
+
+//keep username
+app.use(function (request, response, next) {
+    app.locals.user = request.session.user;
+    request.app.locals.user = request.session.user;     //For match functon
+    app.locals.loggedin = request.session.loggedin;
+    next();
+});
 
 //Static
 
